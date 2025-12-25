@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فرار از معبد نفرین‌شده</title>
+    <title>فرار در بیابان کاکتوس‌ها</title>
     <style>
         body {
             margin: 0;
@@ -11,13 +11,13 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #4B0082; /* بنفش تیره، حس معبد */
+            background-color: #EDC9AF; /* رنگ بیابانی */
             overflow: hidden;
         }
         #game-container {
             width: 800px;
             height: 400px;
-            background-color: #808080; /* خاکستری، حس سنگ معبد */
+            background-color: #F4A460; /* شنی */
             position: relative;
             border: 2px solid #FFD700;
             overflow: hidden;
@@ -25,25 +25,47 @@
         #player {
             width: 40px;
             height: 40px;
-            background-color: #FF4500; /* نارنجی، کاوشگر */
+            font-size: 30px;
             position: absolute;
             bottom: 0;
             left: 50px;
+            text-align: center;
+            line-height: 40px;
         }
         .obstacle {
-            width: 20px;
+            width: 30px;
             height: 60px;
-            background-color: #8B0000; /* قرمز تیره، دیوار خطرناک */
+            font-size: 40px;
             position: absolute;
             bottom: 0;
+            text-align: center;
+        }
+        .bird {
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            position: absolute;
+            top: 50px;
         }
         #goal {
             width: 30px;
             height: 30px;
-            background-color: #FFD700; /* طلایی، کلید */
+            font-size: 20px;
             position: absolute;
             bottom: 0;
             right: 20px;
+            text-align: center;
+            line-height: 30px;
+        }
+        #score {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 20px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px;
+            border-radius: 5px;
         }
         #game-over, #win {
             display: none;
@@ -51,11 +73,12 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 2em;
+            font-size: 1.5em;
             color: white;
             background-color: rgba(0, 0, 0, 0.7);
             padding: 20px;
             border-radius: 10px;
+            text-align: center;
         }
         button {
             background-color: #FFD700;
@@ -69,10 +92,11 @@
 </head>
 <body>
     <div id="game-container">
-        <div id="player"></div>
-        <div id="goal"></div>
-        <div id="game-over">بازی تمام شد! برخورد کردی!</div>
-        <div id="win">تبریک! کلید رو پیدا کردی!</div>
+        <div id="player">🧑</div>
+        <div id="goal">🔑</div>
+        <div id="score">امتیاز: 0</div>
+        <div id="game-over">بازی تمام شد!<br>امتیاز: <span id="final-score"></span></div>
+        <div id="win">تبریک! کلید رو پیدا کردی!<br>امتیاز: <span id="win-score"></span></div>
     </div>
 
     <script>
@@ -81,11 +105,15 @@
         const gameOverScreen = document.getElementById('game-over');
         const winScreen = document.getElementById('win');
         const goal = document.getElementById('goal');
+        const scoreDisplay = document.getElementById('score');
+        const finalScore = document.getElementById('final-score');
+        const winScore = document.getElementById('win-score');
 
         let playerX = 50;
         let playerY = 0;
         let isJumping = false;
         let gameOver = false;
+        let score = 0;
 
         // حرکت بازیکن
         document.addEventListener('keydown', (e) => {
@@ -99,9 +127,11 @@
             }
             if (e.key === 'ArrowUp' && !isJumping) {
                 isJumping = true;
+                score += 1; // امتیاز برای هر پرش
+                scoreDisplay.innerHTML = `امتیاز: ${score}`;
                 let jumpHeight = 0;
                 const jumpInterval = setInterval(() => {
-                    if (jumpHeight >= 100) {
+                    if (jumpHeight >= 120) {
                         clearInterval(jumpInterval);
                         const fallInterval = setInterval(() => {
                             if (jumpHeight <= 0) {
@@ -120,12 +150,13 @@
             player.style.left = playerX + 'px';
         });
 
-        // ایجاد موانع
+        // ایجاد موانع (کاکتوس)
         function createObstacle() {
             if (gameOver) return;
 
             const obstacle = document.createElement('div');
             obstacle.classList.add('obstacle');
+            obstacle.innerHTML = '🌵';
             obstacle.style.right = '0px';
             gameContainer.appendChild(obstacle);
 
@@ -149,23 +180,67 @@
                 ) {
                     gameOver = true;
                     gameOverScreen.style.display = 'block';
+                    finalScore.innerHTML = score;
                     addRestartButton(gameOverScreen);
-                }
-
-                // بررسی رسیدن به کلید
-                const goalRect = goal.getBoundingClientRect();
-                if (
-                    playerRect.left < goalRect.right &&
-                    playerRect.right > goalRect.left &&
-                    playerRect.bottom > goalRect.top
-                ) {
-                    gameOver = true;
-                    winScreen.style.display = 'block';
-                    addRestartButton(winScreen);
                 }
             }, 20);
 
             setTimeout(createObstacle, Math.random() * 2000 + 1000);
+        }
+
+        // ایجاد پرنده
+        function createBird() {
+            if (gameOver) return;
+
+            const bird = document.createElement('div');
+            bird.classList.add('bird');
+            bird.innerHTML = '🐦';
+            bird.style.right = '0px';
+            gameContainer.appendChild(bird);
+
+            let birdX = 0;
+            const moveBird = setInterval(() => {
+                if (birdX >= 800 || gameOver) {
+                    clearInterval(moveBird);
+                    bird.remove();
+                    return;
+                }
+                birdX += 7;
+                bird.style.right = birdX + 'px';
+
+                // بررسی برخورد با پرنده
+                const playerRect = player.getBoundingClientRect();
+                const birdRect = bird.getBoundingClientRect();
+                if (
+                    playerRect.left < birdRect.right &&
+                    playerRect.right > birdRect.left &&
+                    playerRect.top < birdRect.bottom &&
+                    playerRect.bottom > birdRect.top
+                ) {
+                    gameOver = true;
+                    gameOverScreen.style.display = 'block';
+                    finalScore.innerHTML = score;
+                    addRestartButton(gameOverScreen);
+                }
+            }, 20);
+
+            setTimeout(createBird, Math.random() * 3000 + 2000);
+        }
+
+        // بررسی رسیدن به کلید
+        function checkGoal() {
+            const playerRect = player.getBoundingClientRect();
+            const goalRect = goal.getBoundingClientRect();
+            if (
+                playerRect.left < goalRect.right &&
+                playerRect.right > goalRect.left &&
+                playerRect.bottom > goalRect.top
+            ) {
+                gameOver = true;
+                winScreen.style.display = 'block';
+                winScore.innerHTML = score;
+                addRestartButton(winScreen);
+            }
         }
 
         function addRestartButton(screen) {
@@ -175,7 +250,10 @@
             screen.appendChild(restartBtn);
         }
 
+        // شروع بازی
         createObstacle();
+        createBird();
+        setInterval(checkGoal, 20);
     </script>
 </body>
 </html>
