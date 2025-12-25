@@ -5,120 +5,133 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>باغ فکر - بازی فکری کودکان</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/Iranian-Sans/IranianSans.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            font-family: 'Iranian Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffccd5 0%, #ffd6ff 50%, #c8f4ff 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 15px;
             color: #333;
         }
         
         .container {
-            max-width: 1000px;
+            max-width: 900px;
             width: 100%;
             background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 25px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
             overflow: hidden;
-            padding: 20px;
+            padding: 15px;
         }
         
         header {
             text-align: center;
-            padding: 20px 0;
-            background: linear-gradient(90deg, #ff9a9e 0%, #fad0c4 100%);
-            border-radius: 20px;
-            margin-bottom: 25px;
+            padding: 15px 0;
+            background: linear-gradient(90deg, #ff9ebb 0%, #a0e7ff 100%);
+            border-radius: 18px;
+            margin-bottom: 20px;
+            border: 4px dashed #ff6b9d;
         }
         
         h1 {
-            color: #5d3a9b;
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            color: #ff4081;
+            font-size: 2rem;
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 0 #fff;
         }
         
         .subtitle {
-            font-size: 1.3rem;
-            color: #6a11cb;
-            margin-bottom: 15px;
+            font-size: 1rem;
+            color: #6a1b9a;
+            margin-bottom: 10px;
         }
         
         .game-area {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 20px;
         }
         
         .game-selection {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 20px;
+            gap: 15px;
+            margin-bottom: 15px;
         }
         
         .game-btn {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            border: none;
-            border-radius: 20px;
-            color: white;
-            font-size: 1.4rem;
-            padding: 20px 30px;
+            background: linear-gradient(135deg, #ff9ebb 0%, #a0e7ff 100%);
+            border: 3px solid #ff6b9d;
+            border-radius: 18px;
+            color: #6a1b9a;
+            font-size: 1rem;
+            padding: 15px 20px;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 180px;
-            box-shadow: 0 8px 20px rgba(106, 17, 203, 0.3);
+            width: 150px;
+            box-shadow: 0 6px 15px rgba(255, 107, 157, 0.3);
         }
         
         .game-btn i {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            color: #ff4081;
         }
         
         .game-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(106, 17, 203, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 157, 0.4);
         }
         
         .game-btn.active {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-            color: #5d3a9b;
+            background: linear-gradient(135deg, #ff4081 0%, #7b1fa2 100%);
+            color: white;
+            border-color: #7b1fa2;
+        }
+        
+        .game-btn.active i {
+            color: white;
         }
         
         .game-content {
             background-color: #f9f7ff;
-            border-radius: 25px;
-            padding: 30px;
-            min-height: 400px;
+            border-radius: 20px;
+            padding: 20px;
+            min-height: 350px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.05);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+            border: 3px solid #e1bee7;
         }
         
         .game-instruction {
-            font-size: 1.5rem;
-            color: #5d3a9b;
+            font-size: 1.1rem;
+            color: #7b1fa2;
             text-align: center;
-            margin-bottom: 30px;
-            line-height: 1.6;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            background-color: #f3e5f5;
+            padding: 10px 15px;
+            border-radius: 12px;
+            border: 2px dotted #ba68c8;
         }
         
         .game-board {
@@ -134,21 +147,22 @@
         .shape-match-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-top: 20px;
+            gap: 15px;
+            margin-top: 15px;
         }
         
         .shape-card {
             background-color: white;
-            border-radius: 20px;
-            height: 120px;
+            border-radius: 15px;
+            height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             overflow: hidden;
+            border: 3px solid #ffcc80;
         }
         
         .shape-card:hover {
@@ -156,17 +170,19 @@
         }
         
         .shape-card.selected {
-            box-shadow: 0 0 0 4px #6a11cb;
+            box-shadow: 0 0 0 4px #ff4081;
+            border-color: #ff4081;
         }
         
         .shape-card.matched {
-            opacity: 0.5;
+            opacity: 0.6;
             cursor: default;
+            border-color: #4caf50;
         }
         
         .shape {
-            font-size: 3.5rem;
-            color: #5d3a9b;
+            font-size: 2.5rem;
+            color: #ff9800;
         }
         
         /* استایل بازی شمارش */
@@ -177,47 +193,58 @@
         }
         
         .counting-question {
-            font-size: 2rem;
-            color: #5d3a9b;
-            margin-bottom: 30px;
+            font-size: 1.5rem;
+            color: #7b1fa2;
+            margin-bottom: 20px;
             text-align: center;
+            background-color: #e1bee7;
+            padding: 10px 15px;
+            border-radius: 15px;
+        }
+        
+        .counting-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .counting-item {
+            font-size: 2.2rem;
+            color: #ff4081;
         }
         
         .counting-options {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
-            margin-bottom: 30px;
+            gap: 15px;
+            margin-bottom: 20px;
         }
         
         .counting-option {
             background-color: white;
-            border-radius: 20px;
-            width: 120px;
-            height: 120px;
+            border-radius: 15px;
+            width: 90px;
+            height: 90px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+            border: 3px solid #81d4fa;
         }
         
         .counting-option:hover {
             transform: scale(1.05);
         }
         
-        .counting-option i {
-            font-size: 2.5rem;
-            color: #ff9a9e;
-            margin-bottom: 10px;
-        }
-        
         .counting-option .number {
             font-size: 2rem;
-            color: #5d3a9b;
+            color: #7b1fa2;
             font-weight: bold;
         }
         
@@ -229,33 +256,37 @@
         }
         
         .color-question {
-            font-size: 2rem;
-            color: #5d3a9b;
-            margin-bottom: 30px;
+            font-size: 1.5rem;
+            color: #7b1fa2;
+            margin-bottom: 20px;
             text-align: center;
+            background-color: #e1bee7;
+            padding: 10px 15px;
+            border-radius: 15px;
         }
         
         .color-options {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
-            margin-bottom: 30px;
+            gap: 15px;
+            margin-bottom: 20px;
         }
         
         .color-option {
-            width: 120px;
-            height: 120px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 1.3rem;
             color: white;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            border: 3px solid white;
         }
         
         .color-option:hover {
@@ -272,57 +303,102 @@
         .puzzle-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 30px;
-            max-width: 400px;
+            gap: 4px;
+            margin-bottom: 20px;
+            max-width: 320px;
+            background-color: #fff;
+            padding: 8px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border: 3px solid #ffcc80;
         }
         
         .puzzle-piece {
             width: 100px;
             height: 100px;
-            background-color: #ff9a9e;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            color: white;
+            background-size: 300px 300px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #ffcc80;
         }
         
         .puzzle-piece:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
         
         .puzzle-piece.empty {
-            background-color: #e0e0e0;
+            background-color: #f5f5f5;
             cursor: default;
+            background-image: none !important;
+            border-style: dashed;
         }
         
         .puzzle-piece.empty:hover {
             transform: none;
         }
         
-        .feedback {
-            font-size: 2rem;
-            margin-top: 20px;
-            min-height: 50px;
-            text-align: center;
-            color: #6a11cb;
+        .puzzle-piece.correct {
+            box-shadow: 0 0 0 3px #4CAF50;
+        }
+        
+        .puzzle-piece-number {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #ff4081;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: bold;
+            font-size: 1rem;
+            border: 2px solid #ff4081;
+        }
+        
+        .puzzle-complete-image {
+            display: none;
+            max-width: 300px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px;
+            border: 4px solid #ff4081;
+        }
+        
+        .puzzle-complete-image.active {
+            display: block;
+        }
+        
+        .feedback {
+            font-size: 1.5rem;
+            margin-top: 15px;
+            min-height: 40px;
+            text-align: center;
+            color: #7b1fa2;
+            font-weight: bold;
+            background-color: #f3e5f5;
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 2px dotted #ba68c8;
         }
         
         .score-board {
             display: flex;
             justify-content: space-around;
-            background: linear-gradient(90deg, #ffecd2 0%, #fcb69f 100%);
-            padding: 15px;
-            border-radius: 20px;
-            margin-top: 20px;
+            background: linear-gradient(90deg, #ffcc80 0%, #a5d6a7 100%);
+            padding: 12px;
+            border-radius: 15px;
+            margin-top: 15px;
             width: 100%;
-            max-width: 600px;
+            max-width: 500px;
+            border: 3px solid #ff9800;
         }
         
         .score-item {
@@ -332,65 +408,78 @@
         }
         
         .score-value {
-            font-size: 2.5rem;
-            color: #5d3a9b;
+            font-size: 1.8rem;
+            color: #d81b60;
             font-weight: bold;
         }
         
         .score-label {
-            font-size: 1.2rem;
-            color: #6a11cb;
+            font-size: 1rem;
+            color: #7b1fa2;
         }
         
         .actions {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-top: 25px;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
         }
         
         .action-btn {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            background: linear-gradient(135deg, #ff9ebb 0%, #a0e7ff 100%);
             border: none;
-            border-radius: 15px;
-            color: #5d3a9b;
-            font-size: 1.3rem;
-            padding: 15px 25px;
+            border-radius: 12px;
+            color: #7b1fa2;
+            font-size: 1rem;
+            padding: 12px 20px;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             font-weight: bold;
+            border: 2px solid #ff6b9d;
         }
         
         .action-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(255, 154, 158, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 107, 157, 0.3);
+        }
+        
+        .action-btn i {
+            font-size: 1.2rem;
         }
         
         footer {
             text-align: center;
-            margin-top: 30px;
-            color: #5d3a9b;
-            font-size: 1.1rem;
-            padding: 15px;
+            margin-top: 20px;
+            color: #7b1fa2;
+            font-size: 0.9rem;
+            padding: 12px;
             width: 100%;
+        }
+        
+        .kid-image {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin: 5px;
         }
         
         @media (max-width: 768px) {
             .container {
-                padding: 15px;
+                padding: 12px;
             }
             
             h1 {
-                font-size: 2.2rem;
+                font-size: 1.6rem;
             }
             
             .game-btn {
-                width: 150px;
-                padding: 15px 20px;
-                font-size: 1.2rem;
+                width: 130px;
+                padding: 12px 15px;
+                font-size: 0.9rem;
             }
             
             .shape-match-container {
@@ -398,24 +487,38 @@
             }
             
             .shape-card {
-                height: 100px;
+                height: 80px;
             }
             
             .counting-option, .color-option {
-                width: 100px;
-                height: 100px;
+                width: 80px;
+                height: 80px;
+            }
+            
+            .puzzle-piece {
+                width: 85px;
+                height: 85px;
+            }
+            
+            .puzzle-container {
+                max-width: 280px;
+            }
+            
+            .game-content {
+                padding: 15px;
+                min-height: 320px;
             }
         }
         
         @media (max-width: 480px) {
             h1 {
-                font-size: 1.8rem;
+                font-size: 1.4rem;
             }
             
             .game-btn {
-                width: 130px;
-                padding: 12px 15px;
-                font-size: 1rem;
+                width: 120px;
+                padding: 10px 12px;
+                font-size: 0.85rem;
             }
             
             .shape-match-container {
@@ -423,8 +526,20 @@
             }
             
             .puzzle-piece {
-                width: 80px;
-                height: 80px;
+                width: 70px;
+                height: 70px;
+            }
+            
+            .puzzle-container {
+                max-width: 230px;
+            }
+            
+            .counting-item {
+                font-size: 1.8rem;
+            }
+            
+            .counting-option .number {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -432,7 +547,7 @@
 <body>
     <div class="container">
         <header>
-            <h1>باغ فکر</h1>
+            <h1>🎮 باغ فکر کودکانه 🎨</h1>
             <div class="subtitle">بازی‌های فکری و تعاملی برای کودکان ۳ تا ۵ سال</div>
             <div class="subtitle">تقویت هوش و مهارت‌های شناختی</div>
         </header>
@@ -473,6 +588,7 @@
                         <div class="counting-question" id="counting-question">
                             چند تا سیب می‌بینی؟
                         </div>
+                        <div class="counting-items" id="counting-items"></div>
                         <div class="counting-options" id="counting-options"></div>
                     </div>
                 </div>
@@ -490,6 +606,7 @@
                 <!-- بازی پازل -->
                 <div class="game-board" id="puzzle-game">
                     <div class="puzzle-game">
+                        <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="تصویر پازل" class="puzzle-complete-image" id="puzzle-complete-image">
                         <div class="puzzle-container" id="puzzle-container"></div>
                     </div>
                 </div>
@@ -545,28 +662,38 @@
             counting: {
                 currentQuestion: 0,
                 questions: [
-                    { question: "چند تا سیب می‌بینی؟", count: 3, icon: "apple-alt" },
-                    { question: "چند تا پروانه می‌بینی؟", count: 5, icon: "butterfly" },
-                    { question: "چند تا گل می‌بینی؟", count: 4, icon: "flower" },
-                    { question: "چند تا ماهی می‌بینی؟", count: 2, icon: "fish" },
-                    { question: "چند تا ستاره می‌بینی؟", count: 6, icon: "star" }
+                    { question: "چند تا سیب می‌بینی؟", count: 3, icon: "apple-alt", image: "🍎" },
+                    { question: "چند تا پروانه می‌بینی؟", count: 5, icon: "butterfly", image: "🦋" },
+                    { question: "چند تا گل می‌بینی؟", count: 4, icon: "flower", image: "🌼" },
+                    { question: "چند تا ماهی می‌بینی؟", count: 2, icon: "fish", image: "🐠" },
+                    { question: "چند تا ستاره می‌بینی؟", count: 6, icon: "star", image: "⭐" }
                 ]
             },
             colors: {
                 currentQuestion: 0,
                 questions: [
-                    { question: "رنگ قرمز را انتخاب کن", color: "red" },
-                    { question: "رنگ آبی را انتخاب کن", color: "blue" },
-                    { question: "رنگ سبز را انتخاب کن", color: "green" },
-                    { question: "رنگ زرد را انتخاب کن", color: "yellow" },
-                    { question: "رنگ بنفش را انتخاب کن", color: "purple" }
+                    { question: "رنگ قرمز را انتخاب کن", color: "red", emoji: "🔴" },
+                    { question: "رنگ آبی را انتخاب کن", color: "blue", emoji: "🔵" },
+                    { question: "رنگ سبز را انتخاب کن", color: "green", emoji: "🟢" },
+                    { question: "رنگ زرد را انتخاب کن", color: "yellow", emoji: "🟡" },
+                    { question: "رنگ بنفش را انتخاب کن", color: "purple", emoji: "🟣" }
                 ],
                 colorOptions: ['red', 'blue', 'green', 'yellow', 'orange', 'purple', 'pink', 'brown']
             },
             puzzle: {
                 pieces: [1, 2, 3, 4, 5, 6, 7, 8, null],
                 correctOrder: [1, 2, 3, 4, 5, 6, 7, 8, null],
-                emptyIndex: 8
+                emptyIndex: 8,
+                imagePositions: {
+                    1: { x: 0, y: 0 },
+                    2: { x: -100, y: 0 },
+                    3: { x: -200, y: 0 },
+                    4: { x: 0, y: -100 },
+                    5: { x: -100, y: -100 },
+                    6: { x: -200, y: -100 },
+                    7: { x: 0, y: -200 },
+                    8: { x: -100, y: -200 }
+                }
             }
         };
 
@@ -587,6 +714,7 @@
         const hintButton = document.getElementById('hint-btn');
         const nextButton = document.getElementById('next-btn');
         const resetButton = document.getElementById('reset-btn');
+        const puzzleCompleteImage = document.getElementById('puzzle-complete-image');
 
         // آیکون‌های شکل‌ها
         const shapeIcons = {
@@ -608,6 +736,16 @@
             purple: 'بنفش',
             pink: 'صورتی',
             brown: 'قهوه‌ای'
+        };
+
+        // تصاویر کودکانه برای شکل‌ها
+        const shapeImages = {
+            circle: '⭕',
+            square: '⬛',
+            triangle: '🔺',
+            star: '⭐',
+            heart: '❤️',
+            diamond: '💎'
         };
 
         // مقداردهی اولیه بازی
@@ -682,16 +820,16 @@
         // به‌روزرسانی دستورالعمل بازی
         function updateInstruction() {
             const instructions = {
-                shape: "دو شکل مشابه را پیدا کن و روی آنها کلیک کن",
-                counting: "تعداد صحیح را انتخاب کن",
-                colors: "رنگ درخواست شده را انتخاب کن",
-                puzzle: "قطعه‌های پازل را مرتب کن تا تصویر کامل شود"
+                shape: "دو شکل مشابه را پیدا کن و روی آنها کلیک کن! ✨",
+                counting: "تعداد صحیح را انتخاب کن! 🧮",
+                colors: "رنگ درخواست شده را انتخاب کن! 🎨",
+                puzzle: "قطعه‌های پازل را مرتب کن تا تصویر کامل شود! 🧩"
             };
             
             instruction.textContent = instructions[currentGame];
         }
 
-        // بازی تطابق اشکال
+        // بازی تطابق اشکال - با تصاویر کودکانه
         function initShapeGame() {
             const container = document.getElementById('shape-container');
             container.innerHTML = '';
@@ -710,11 +848,13 @@
                 card.dataset.index = index;
                 card.dataset.shape = shape;
                 
-                const shapeIcon = document.createElement('i');
-                shapeIcon.className = shapeIcons[shape];
-                shapeIcon.style.color = getRandomColor();
+                // استفاده از ایموجی به جای آیکون فونت
+                const shapeEmoji = document.createElement('div');
+                shapeEmoji.className = 'shape';
+                shapeEmoji.textContent = shapeImages[shape];
+                shapeEmoji.style.fontSize = '2.5rem';
                 
-                card.appendChild(shapeIcon);
+                card.appendChild(shapeEmoji);
                 card.addEventListener('click', () => selectShapeCard(index));
                 
                 container.appendChild(card);
@@ -757,10 +897,10 @@
                     
                     // بررسی پایان بازی
                     if (gameData.shapeMatch.matchedPairs === gameData.shapeMatch.shapes.length) {
-                        feedback.textContent = "آفرین! همه شکل‌ها را تطبیق دادی!";
+                        feedback.textContent = "آفرین! همه شکل‌ها را تطبیق دادی! 🎉";
                         score += 50; // امتیاز اضافی برای تکمیل بازی
                     } else {
-                        feedback.textContent = "آفرین! شکل‌ها تطبیق دارند!";
+                        feedback.textContent = "آفرین! شکل‌ها تطبیق دارند! 👍";
                     }
                     
                     updateScore();
@@ -773,7 +913,7 @@
                     card.classList.remove('selected');
                     
                     wrongAnswers++;
-                    feedback.textContent = "اشکالی نداره، دوباره امتحان کن!";
+                    feedback.textContent = "اشکالی نداره، دوباره امتحان کن! 🤗";
                     updateScore();
                 }, 800);
             }
@@ -781,10 +921,24 @@
             gameData.shapeMatch.selectedCard = null;
         }
 
-        // بازی شمارش
+        // بازی شمارش - با تصاویر کودکانه
         function initCountingGame() {
             const question = gameData.counting.questions[gameData.counting.currentQuestion];
             document.getElementById('counting-question').textContent = question.question;
+            
+            // ایجاد آیتم‌های قابل شمارش
+            const itemsContainer = document.getElementById('counting-items');
+            itemsContainer.innerHTML = '';
+            
+            for (let i = 0; i < question.count; i++) {
+                const item = document.createElement('div');
+                item.className = 'counting-item';
+                item.textContent = question.image;
+                item.style.fontSize = '2.5rem';
+                item.style.margin = '5px';
+                
+                itemsContainer.appendChild(item);
+            }
             
             const optionsContainer = document.getElementById('counting-options');
             optionsContainer.innerHTML = '';
@@ -808,19 +962,17 @@
                 option.className = 'counting-option';
                 option.dataset.count = count;
                 
-                const icon = document.createElement('i');
-                icon.className = `fas fa-${question.icon}`;
-                
                 const number = document.createElement('div');
                 number.className = 'number';
                 number.textContent = count;
                 
-                option.appendChild(icon);
                 option.appendChild(number);
                 
                 option.addEventListener('click', () => checkCountingAnswer(count, question.count));
                 optionsContainer.appendChild(option);
             });
+            
+            feedback.textContent = '';
         }
 
         // بررسی پاسخ بازی شمارش
@@ -832,17 +984,23 @@
                 
                 if (parseInt(option.dataset.count) === correct) {
                     option.style.boxShadow = '0 0 0 4px #4CAF50';
+                    option.style.backgroundColor = '#E8F5E9';
+                    option.style.borderColor = '#4CAF50';
                 }
                 
                 if (parseInt(option.dataset.count) === selected) {
                     if (selected === correct) {
                         option.style.boxShadow = '0 0 0 4px #4CAF50';
-                        feedback.textContent = "آفرین! درست جواب دادی!";
+                        option.style.backgroundColor = '#E8F5E9';
+                        option.style.borderColor = '#4CAF50';
+                        feedback.textContent = "آفرین! درست جواب دادی! 🎉";
                         score += 10;
                         correctAnswers++;
                     } else {
                         option.style.boxShadow = '0 0 0 4px #FF5252';
-                        feedback.textContent = "اشکالی نداره، دفعه بعدی درست میشه!";
+                        option.style.backgroundColor = '#FFEBEE';
+                        option.style.borderColor = '#FF5252';
+                        feedback.textContent = "اشکالی نداره، دفعه بعدی درست میشه! 🤗";
                         wrongAnswers++;
                     }
                 }
@@ -851,10 +1009,10 @@
             updateScore();
         }
 
-        // بازی رنگ‌ها
+        // بازی رنگ‌ها - با ایموجی
         function initColorsGame() {
             const question = gameData.colors.questions[gameData.colors.currentQuestion];
-            document.getElementById('color-question').textContent = question.question;
+            document.getElementById('color-question').textContent = `${question.question} ${question.emoji}`;
             
             const optionsContainer = document.getElementById('color-options');
             optionsContainer.innerHTML = '';
@@ -877,11 +1035,28 @@
                 option.className = 'color-option';
                 option.dataset.color = color;
                 option.style.backgroundColor = color;
-                option.textContent = colorNames[color];
+                
+                // اضافه کردن ایموجی متناسب با رنگ
+                let emoji = '';
+                switch(color) {
+                    case 'red': emoji = '🔴'; break;
+                    case 'blue': emoji = '🔵'; break;
+                    case 'green': emoji = '🟢'; break;
+                    case 'yellow': emoji = '🟡'; break;
+                    case 'orange': emoji = '🟠'; break;
+                    case 'purple': emoji = '🟣'; break;
+                    case 'pink': emoji = '🌸'; break;
+                    case 'brown': emoji = '🟤'; break;
+                }
+                
+                option.textContent = emoji;
+                option.style.fontSize = '2rem';
                 
                 option.addEventListener('click', () => checkColorAnswer(color, question.color));
                 optionsContainer.appendChild(option);
             });
+            
+            feedback.textContent = '';
         }
 
         // بررسی پاسخ بازی رنگ‌ها
@@ -893,17 +1068,20 @@
                 
                 if (option.dataset.color === correct) {
                     option.style.boxShadow = '0 0 0 4px #4CAF50';
+                    option.style.borderColor = '#4CAF50';
                 }
                 
                 if (option.dataset.color === selected) {
                     if (selected === correct) {
                         option.style.boxShadow = '0 0 0 4px #4CAF50';
-                        feedback.textContent = "عالی! رنگ درست رو انتخاب کردی!";
+                        option.style.borderColor = '#4CAF50';
+                        feedback.textContent = `عالی! رنگ ${colorNames[correct]} رو انتخاب کردی! 🎉`;
                         score += 10;
                         correctAnswers++;
                     } else {
                         option.style.boxShadow = '0 0 0 4px #FF5252';
-                        feedback.textContent = `این رنگ ${colorNames[selected]} هست، رنگ ${colorNames[correct]} رو انتخاب کن!`;
+                        option.style.borderColor = '#FF5252';
+                        feedback.textContent = `این رنگ ${colorNames[selected]} هست، رنگ ${colorNames[correct]} رو انتخاب کن! 🤔`;
                         wrongAnswers++;
                     }
                 }
@@ -912,10 +1090,13 @@
             updateScore();
         }
 
-        // بازی پازل
+        // بازی پازل - با تصویر کودکانه
         function initPuzzleGame() {
             const container = document.getElementById('puzzle-container');
             container.innerHTML = '';
+            
+            // مخفی کردن تصویر کامل
+            puzzleCompleteImage.classList.remove('active');
             
             // به هم زدن قطعات پازل
             gameData.puzzle.pieces = shuffleArray([...gameData.puzzle.correctOrder]);
@@ -925,19 +1106,28 @@
             gameData.puzzle.pieces.forEach((piece, index) => {
                 const puzzlePiece = document.createElement('div');
                 puzzlePiece.className = 'puzzle-piece';
+                
                 if (piece === null) {
                     puzzlePiece.classList.add('empty');
-                    puzzlePiece.textContent = '';
                 } else {
-                    puzzlePiece.textContent = piece;
-                    puzzlePiece.style.backgroundColor = getPuzzleColor(piece);
+                    // تنظیم پس‌زمینه برای نمایش بخشی از تصویر
+                    const pos = gameData.puzzle.imagePositions[piece];
+                    puzzlePiece.style.backgroundImage = 'url("https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80")';
+                    puzzlePiece.style.backgroundPosition = `${pos.x}px ${pos.y}px`;
+                    
+                    // اضافه کردن شماره قطعه
+                    const number = document.createElement('div');
+                    number.className = 'puzzle-piece-number';
+                    number.textContent = piece;
+                    puzzlePiece.appendChild(number);
+                    
                     puzzlePiece.addEventListener('click', () => movePuzzlePiece(index));
                 }
                 
                 container.appendChild(puzzlePiece);
             });
             
-            feedback.textContent = "قطعه‌ها را جابه‌جا کن تا به ترتیب اعداد برسی!";
+            feedback.textContent = "قطعه‌ها را جابه‌جا کن تا تصویر کامل شود! 🧩";
         }
 
         // حرکت قطعه پازل
@@ -965,9 +1155,12 @@
                 
                 // بررسی تکمیل پازل
                 if (checkPuzzleComplete()) {
-                    feedback.textContent = "آفرین! پازل رو کامل کردی!";
-                    score += 30;
+                    feedback.textContent = "آفرین! پازل رو کامل کردی! 🎉";
+                    score += 50;
                     correctAnswers++;
+                    
+                    // نمایش تصویر کامل
+                    puzzleCompleteImage.classList.add('active');
                     updateScore();
                 } else {
                     score += 2; // امتیاز برای هر حرکت
@@ -982,15 +1175,27 @@
             
             gameData.puzzle.pieces.forEach((piece, index) => {
                 if (piece === null) {
-                    pieces[index].classList.add('empty');
-                    pieces[index].textContent = '';
-                    pieces[index].style.backgroundColor = '';
+                    pieces[index].className = 'puzzle-piece empty';
+                    pieces[index].innerHTML = '';
+                    pieces[index].style.backgroundImage = '';
                     pieces[index].removeEventListener('click', () => movePuzzlePiece(index));
                 } else {
-                    pieces[index].classList.remove('empty');
-                    pieces[index].textContent = piece;
-                    pieces[index].style.backgroundColor = getPuzzleColor(piece);
-                    pieces[index].addEventListener('click', () => movePuzzlePiece(index));
+                    // تنظیم پس‌زمینه برای نمایش بخشی از تصویر
+                    const pos = gameData.puzzle.imagePositions[piece];
+                    pieces[index].className = 'puzzle-piece';
+                    pieces[index].style.backgroundImage = 'url("https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80")';
+                    pieces[index].style.backgroundPosition = `${pos.x}px ${pos.y}px`;
+                    
+                    // اضافه کردن شماره قطعه
+                    pieces[index].innerHTML = '';
+                    const number = document.createElement('div');
+                    number.className = 'puzzle-piece-number';
+                    number.textContent = piece;
+                    pieces[index].appendChild(number);
+                    
+                    // حذف رویداد قبلی و اضافه کردن رویداد جدید
+                    pieces[index].replaceWith(pieces[index].cloneNode(true));
+                    document.querySelectorAll('.puzzle-piece')[index].addEventListener('click', () => movePuzzlePiece(index));
                 }
             });
         }
@@ -1005,31 +1210,22 @@
             return true;
         }
 
-        // رنگ قطعات پازل
-        function getPuzzleColor(number) {
-            const colors = [
-                '#FF9A9E', '#A1C4FD', '#C2E9FB', '#FFD1FF', 
-                '#FFECD2', '#FCB69F', '#84FAB0', '#8FD3F4'
-            ];
-            return colors[number - 1] || '#FF9A9E';
-        }
-
         // راهنمایی
         function giveHint() {
             switch(currentGame) {
                 case 'shape':
-                    feedback.textContent = "به دنبال دو شکل مشابه بگرد!";
+                    feedback.textContent = "به دنبال دو شکل مشابه بگرد! 👀";
                     break;
                 case 'counting':
                     const question = gameData.counting.questions[gameData.counting.currentQuestion];
-                    feedback.textContent = `تعداد ${question.count} است!`;
+                    feedback.textContent = `تعداد ${question.count} است! 🤫`;
                     break;
                 case 'colors':
                     const colorQuestion = gameData.colors.questions[gameData.colors.currentQuestion];
-                    feedback.textContent = `رنگ ${colorNames[colorQuestion.color]} را انتخاب کن!`;
+                    feedback.textContent = `رنگ ${colorNames[colorQuestion.color]} را انتخاب کن! 💡`;
                     break;
                 case 'puzzle':
-                    feedback.textContent = "اعداد را به ترتیب از 1 تا 8 مرتب کن!";
+                    feedback.textContent = "اعداد را به ترتیب از 1 تا 8 مرتب کن! 🔢";
                     break;
             }
             
@@ -1055,6 +1251,7 @@
                     initShapeGame();
                     break;
                 case 'puzzle':
+                    puzzleCompleteImage.classList.remove('active');
                     initPuzzleGame();
                     break;
             }
@@ -1082,11 +1279,12 @@
                     initColorsGame();
                     break;
                 case 'puzzle':
+                    puzzleCompleteImage.classList.remove('active');
                     initPuzzleGame();
                     break;
             }
             
-            feedback.textContent = 'بازی از نو شروع شد!';
+            feedback.textContent = 'بازی از نو شروع شد! 🔄';
             updateScore();
         }
 
@@ -1105,17 +1303,6 @@
                 [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
             }
             return newArray;
-        }
-
-        // تابع کمکی: تولید رنگ تصادفی
-        function getRandomColor() {
-            const colors = [
-                '#FF5252', '#FF4081', '#E040FB', '#7C4DFF',
-                '#536DFE', '#448AFF', '#40C4FF', '#18FFFF',
-                '#64FFDA', '#69F0AE', '#B2FF59', '#EEFF41',
-                '#FFFF00', '#FFD740', '#FFAB40', '#FF6E40'
-            ];
-            return colors[Math.floor(Math.random() * colors.length)];
         }
     </script>
 </body>
