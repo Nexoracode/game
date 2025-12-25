@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فرار از معبد نفرین‌شده</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #4B0082; /* بنفش تیره، حس معبد */
+            overflow: hidden;
+        }
+        #game-container {
+            width: 800px;
+            height: 400px;
+            background-color: #808080; /* خاکستری، حس سنگ معبد */
+            position: relative;
+            border: 2px solid #FFD700;
+            overflow: hidden;
+        }
+        #player {
+            width: 40px;
+            height: 40px;
+            background-color: #FF4500; /* نارنجی، کاوشگر */
+            position: absolute;
+            bottom: 0;
+            left: 50px;
+        }
+        .obstacle {
+            width: 20px;
+            height: 60px;
+            background-color: #8B0000; /* قرمز تیره، دیوار خطرناک */
+            position: absolute;
+            bottom: 0;
+        }
+        #goal {
+            width: 30px;
+            height: 30px;
+            background-color: #FFD700; /* طلایی، کلید */
+            position: absolute;
+            bottom: 0;
+            right: 20px;
+        }
+        #game-over, #win {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        button {
+            background-color: #FFD700;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div id="player"></div>
+        <div id="goal"></div>
+        <div id="game-over">بازی تمام شد! برخورد کردی!</div>
+        <div id="win">تبریک! کلید رو پیدا کردی!</div>
+    </div>
+
+    <script>
+        const player = document.getElementById('player');
+        const gameContainer = document.getElementById('game-container');
+        const gameOverScreen = document.getElementById('game-over');
+        const winScreen = document.getElementById('win');
+        const goal = document.getElementById('goal');
+
+        let playerX = 50;
+        let playerY = 0;
+        let isJumping = false;
+        let gameOver = false;
+
+        // حرکت بازیکن
+        document.addEventListener('keydown', (e) => {
+            if (gameOver) return;
+
+            if (e.key === 'ArrowLeft' && playerX > 0) {
+                playerX -= 10;
+            }
+            if (e.key === 'ArrowRight' && playerX < 760) {
+                playerX += 10;
+            }
+            if (e.key === 'ArrowUp' && !isJumping) {
+                isJumping = true;
+                let jumpHeight = 0;
+                const jumpInterval = setInterval(() => {
+                    if (jumpHeight >= 100) {
+                        clearInterval(jumpInterval);
+                        const fallInterval = setInterval(() => {
+                            if (jumpHeight <= 0) {
+                                clearInterval(fallInterval);
+                                isJumping = false;
+                                playerY = 0;
+                            }
+                            jumpHeight -= 5;
+                            player.style.bottom = jumpHeight + 'px';
+                        }, 20);
+                    }
+                    jumpHeight += 5;
+                    player.style.bottom = jumpHeight + 'px';
+                }, 20);
+            }
+            player.style.left = playerX + 'px';
+        });
+
+        // ایجاد موانع
+        function createObstacle() {
+            if (gameOver) return;
+
+            const obstacle = document.createElement('div');
+            obstacle.classList.add('obstacle');
+            obstacle.style.right = '0px';
+            gameContainer.appendChild(obstacle);
+
+            let obstacleX = 0;
+            const moveObstacle = setInterval(() => {
+                if (obstacleX >= 800 || gameOver) {
+                    clearInterval(moveObstacle);
+                    obstacle.remove();
+                    return;
+                }
+                obstacleX += 5;
+                obstacle.style.right = obstacleX + 'px';
+
+                // بررسی برخورد
+                const playerRect = player.getBoundingClientRect();
+                const obstacleRect = obstacle.getBoundingClientRect();
+                if (
+                    playerRect.left < obstacleRect.right &&
+                    playerRect.right > obstacleRect.left &&
+                    playerRect.bottom > obstacleRect.top
+                ) {
+                    gameOver = true;
+                    gameOverScreen.style.display = 'block';
+                    addRestartButton(gameOverScreen);
+                }
+
+                // بررسی رسیدن به کلید
+                const goalRect = goal.getBoundingClientRect();
+                if (
+                    playerRect.left < goalRect.right &&
+                    playerRect.right > goalRect.left &&
+                    playerRect.bottom > goalRect.top
+                ) {
+                    gameOver = true;
+                    winScreen.style.display = 'block';
+                    addRestartButton(winScreen);
+                }
+            }, 20);
+
+            setTimeout(createObstacle, Math.random() * 2000 + 1000);
+        }
+
+        function addRestartButton(screen) {
+            const restartBtn = document.createElement('button');
+            restartBtn.innerHTML = 'شروع مجدد';
+            restartBtn.onclick = () => location.reload();
+            screen.appendChild(restartBtn);
+        }
+
+        createObstacle();
+    </script>
+</body>
+</html>
